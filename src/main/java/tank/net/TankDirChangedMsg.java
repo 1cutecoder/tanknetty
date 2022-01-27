@@ -64,7 +64,7 @@ public class TankDirChangedMsg extends Msg {
 	}
 	@Override
 	public void handle() {
-		if (this.id.equals(GameModel.getInstance().getMainTank().getId()))
+		if (this.id.equals(GameModel.getInstance().getTankMap().get(id)))
 			return;
 
 		Tank t = GameModel.getInstance().findGameeObjectByUUID(this.id);
