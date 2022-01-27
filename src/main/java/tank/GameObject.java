@@ -20,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public abstract class GameObject implements Serializable {
     public int x, y;
-    public UUID id;
+    public UUID id = UUID.randomUUID();
 
     public abstract void paint(Graphics g);
 
