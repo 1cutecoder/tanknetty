@@ -13,6 +13,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import tank.Tank;
 
 /**
  * @author zcl
@@ -99,7 +100,7 @@ class ClientHandler extends SimpleChannelInboundHandler<Msg> {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		ctx.writeAndFlush(new TankJoinMsg(GameModel.getInstance().getMainTank()));
+		ctx.writeAndFlush(new TankJoinMsg(new Tank()));
 	}
 
 }

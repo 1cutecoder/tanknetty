@@ -62,7 +62,7 @@ public class TankFrame extends Frame {
 //        g.drawString("敌人的数量：" + gm.tanks.size(), 10, 80);
 //        g.drawString("爆炸的数量：" + gm.explodes.size(), 10, 100);
         g.setColor(c);
-        GameModel.getInstance().myTank.paint(g);
+        GameModel.getInstance().get.paint(g);
 
     }
 

@@ -19,14 +19,14 @@ import tank.*;
 @NoArgsConstructor
 public class BulletNewMsg extends Msg {
 
-    UUID playerID;
+    UUID playerId;
     UUID id;
     int x, y;
     Dir dir;
     Group group;
 
     public BulletNewMsg(Bullet bullet) {
-        this.playerID = bullet.getPlayerId();
+        this.playerId = bullet.getPlayerId();
         this.id = bullet.getId();
         this.x = bullet.getX();
         this.y = bullet.getY();
@@ -42,10 +42,8 @@ public class BulletNewMsg extends Msg {
         try {
             baos = new ByteArrayOutputStream();
             dos = new DataOutputStream(baos);
-            //��д��ս̹��id
-            dos.writeLong(this.playerID.getMostSignificantBits());
-            dos.writeLong(this.playerID.getLeastSignificantBits());
-            //д�ӵ�id
+            dos.writeLong(this.playerId.getMostSignificantBits());
+            dos.writeLong(this.playerId.getLeastSignificantBits());
             dos.writeLong(id.getMostSignificantBits());
             dos.writeLong(id.getLeastSignificantBits());
             dos.writeInt(x);
@@ -80,7 +78,7 @@ public class BulletNewMsg extends Msg {
     public void parse(byte[] bytes) {
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
         try {
-            this.playerID = new UUID(dis.readLong(), dis.readLong());
+            this.playerId = new UUID(dis.readLong(), dis.readLong());
             this.id = new UUID(dis.readLong(), dis.readLong());
             this.x = dis.readInt();
             this.y = dis.readInt();
@@ -99,11 +97,10 @@ public class BulletNewMsg extends Msg {
 
     @Override
     public void handle() {
-        if (this.playerID.equals(GameModel.getInstance().get().getId())) {
+        if (GameModel.getInstance().getTankMap().containsKey(this.playerId)) {
             return;
         }
-
-        Bullet bullet = new Bullet(this.playerID, x, y, dir, group);
+        Bullet bullet = new Bullet(this.playerId, x, y, dir, group);
         bullet.setId(this.id);
         GameModel.getInstance().add(bullet);
     }

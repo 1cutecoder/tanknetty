@@ -91,7 +91,7 @@ public class TankDieMsg extends Msg {
     @Override
     public void handle() {
         System.out.println("we got a tank die:" + id);
-        System.out.println("and my tank is:" + GameModel.getInstance().getMainTank().getId());
+        System.out.println("and my tank is:" + GameModel.getInstance().getTankMap().get(id));
         Tank tt = GameModel.getInstance().findTankByUUID(id);
         System.out.println("i found a tank with this id:" + tt);
 
@@ -100,8 +100,8 @@ public class TankDieMsg extends Msg {
             b.die();
         }
 
-        if (this.id.equals(GameModel.getInstance().getMainTank().getId())) {
-            GameModel.getInstance().getMainTank().die();
+        if (this.id.equals(GameModel.getInstance().getTankMap().get(id))) {
+            GameModel.getInstance().getTankMap().get(id).die();
         } else {
 
             Tank t = GameModel.getInstance().findTankByUUID(id);

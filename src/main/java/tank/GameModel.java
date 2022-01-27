@@ -1,5 +1,6 @@
 package tank;
 
+import lombok.Data;
 import tank.cor.BulletTankCollider;
 import tank.cor.Collider;
 import tank.cor.ColliderChain;
@@ -19,6 +20,7 @@ import java.util.stream.Stream;
  * @Description model层
  * @Date 2021/12/19 12:44
  */
+@Data
 public class GameModel {
 
     private List<GameObject> objects = new ArrayList<>();
@@ -77,7 +79,7 @@ public class GameModel {
         this.objects.add(go);
     }
     public void addTank(Tank tank) {
-        tankMap.put(tank.getId(),tank);
+        tankMap.put(tank.getPlayerId(),tank);
     }
     public void remove(GameObject go) {
         objects.remove(go);
@@ -105,13 +107,6 @@ public class GameModel {
         }
     }
 
-    public Tank getMainTank(UUID uuid) {
-        Tank tank = (Tank) tankMap.get(uuid);
-        return tank;
-    }
-    public Map<UUID,Tank> getMainTank() {
-        return tankMap;
-    }
     public void save() {
         File f = new File("d:/tank.data");
         ObjectOutputStream oos = null;
@@ -153,7 +148,6 @@ public class GameModel {
     }
 
     public Tank findTankByUUID(UUID id) {
-
         return null;
     }
 
