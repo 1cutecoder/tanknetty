@@ -48,10 +48,7 @@ public class TankJoinMsg extends Msg {
 	public void parse(byte[] bytes) {
 		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
 		try {
-			//TODO:�ȶ�TYPE��Ϣ������TYPE��Ϣ����ͬ����Ϣ
-			//�Թ���Ϣ����
 			//dis.readInt();
-
 			this.x = dis.readInt();
 			this.y = dis.readInt();
 			this.dir = Dir.values()[dis.readInt()];
@@ -130,16 +127,16 @@ public class TankJoinMsg extends Msg {
 
 	@Override
 	public void handle() {
-		if(this.id.equals(GameModel.getInstance().getTankMap().get(id)) ||
+		if(this.id.equals(GameModel.getInstance().getMainTank().getId()) ||
 				GameModel.getInstance().findTankByUUID(this.id) != null) {
 			return;
 		}
 //		System.out.println(this);
-		Tank t = new Tank(this);
-		GameModel.getInstance().add(t);
+		Tank t = new Tank();
+		GameModel.getInstance().addTank(t);
 
 		//send a new TankJoinMsg to the new joined tank
-		Client.INSTANCE.send(new TankJoinMsg(GameModel.getInstance().getTankMap().get(id)));
+		Client.INSTANCE.send(new TankJoinMsg(GameModel.getInstance().getMainTank()));
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author zcl
@@ -16,6 +17,8 @@ import java.util.List;
 public class TankFrame extends Frame {
 
     public static final int GAME_WIDTH = 1280, GAME_HEIGHT = 720;
+
+    public UUID playerId ;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -35,6 +38,7 @@ public class TankFrame extends Frame {
             }
         });
         this.addKeyListener(new MyKeyListener());
+        playerId = UUID.randomUUID();
     }
 
     Image offScreenImage = null;
@@ -62,7 +66,7 @@ public class TankFrame extends Frame {
 //        g.drawString("敌人的数量：" + gm.tanks.size(), 10, 80);
 //        g.drawString("爆炸的数量：" + gm.explodes.size(), 10, 100);
         g.setColor(c);
-        GameModel.getInstance().get.paint(g);
+        GameModel.getInstance().myTank.paint(g);
 
     }
 

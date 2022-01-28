@@ -52,6 +52,13 @@ public class Tank extends GameObject  {
         }
     }
 
+    public Tank(int X, int Y, Dir down, Group good) {
+        super.x = x;
+        super.y = y;
+        this.dir = dir;
+        this.group = group;
+    }
+
     @Override
     public void paint(Graphics g) {
         if (!living) {
