@@ -65,8 +65,9 @@ public class TankStartMovingMsg extends Msg {
 	}
 	@Override
 	public void handle() {
-		if (this.id.equals(GameModel.getInstance().getTankMap().get(id)))
+		if (this.id.equals(GameModel.getInstance().getMainTank().getId())) {
 			return;
+		}
 
 		Tank t = GameModel.getInstance().findTankByUUID(this.id);
 
