@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -97,7 +98,7 @@ public class BulletNewMsg extends Msg {
 
     @Override
     public void handle() {
-        if (GameModel.getInstance().getTankMap().containsKey(this.playerId)) {
+        if (this.playerId.equals(GameModel.getInstance().getMainTank().getId())) {
             return;
         }
         Bullet bullet = new Bullet(this.playerId, x, y, dir, group);
