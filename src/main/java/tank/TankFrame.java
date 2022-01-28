@@ -1,6 +1,9 @@
 package tank;
 
 
+import tank.net.Client;
+import tank.net.TankDirChangedMsg;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -18,7 +21,6 @@ public class TankFrame extends Frame {
 
     public static final int GAME_WIDTH = 1280, GAME_HEIGHT = 720;
 
-    public UUID playerId ;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -38,7 +40,6 @@ public class TankFrame extends Frame {
             }
         });
         this.addKeyListener(new MyKeyListener());
-        playerId = UUID.randomUUID();
     }
 
     Image offScreenImage = null;
@@ -148,6 +149,7 @@ public class TankFrame extends Frame {
             if (bD) {
                 myTank.setDir(Dir.DOWN);
             }
+            Client.INSTANCE.send(new TankDirChangedMsg(myTank));
         }
     }
 }
